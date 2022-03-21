@@ -1,0 +1,113 @@
+﻿@using PersonelTakipOtomasyonu.Models.Entity
+@model List<PersonalAction>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<br />
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+
+                <!-- Profile Image -->
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="~/AdminLTE-master/dist/img/user1-128x128.jpg"
+                                 alt="User profile picture">
+                        </div>
+
+                        <h3 class="profile-username text-center">@ViewBag.userName</h3>
+
+                        <p class="text-muted text-center">@ViewBag.userDep</p>
+
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b>Toplam Rapor Sayısı</b> <a class="float-right">@ViewBag.report</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Son Aksiyon</b> <a class="float-right">@ViewBag.lastAction</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Müşteri Ziyaret Sayısı</b> <a class="float-right">@ViewBag.customer</a>
+                            </li>
+                        </ul>
+
+                        @*<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>*@
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- About Me Box -->
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Son Aksiyonlar</a></li>
+
+                            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Ayarlar</a></li>
+                        </ul>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="activity">
+                                @foreach (var actionList in Model)
+                                {
+                                    <div class="timeline timeline-inverse">
+                                        <div class="time-label">
+                                            <span class="bg-success">
+                                                @actionList.ActionTime.ToString("dd MMMM yyyy")
+                                            </span>
+                                        </div>
+                                        <!-- /.timeline-label -->
+                                        <!-- timeline item -->
+                                        <!-- END timeline item -->
+                                        <div>
+                                            <i class="far fa-clock bg-gray"></i>
+                                        </div>
+                                        <div>
+                                            <div class="timeline-item">
+                                                <span class="time"><i class="far fa-clock"></i>  @actionList.ActionTime.ToString("HH:mm")</span>
+
+                                                <h3 class="timeline-header border-0">
+                                                    <a href="#"> @actionList.ActionType.Name </a>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <!-- END timeline item -->
+                                        <!-- timeline item -->
+                                        <!-- END timeline item -->
+                                        <!-- timeline time label -->
+
+                                    </div>
+                                }
+
+
+                            </div>
+
+                            <div class="tab-pane" id="settings">
+                                @*@await Html.PartialAsync("~/Views/Profile/_Edit.cshtml",null)*@
+                                @await Component.InvokeAsync("Edit")
+
+                                @*@{await Html.RenderPartialAsync("_Edit");}
+                                    @*<partial name="_Edit.cshtml" />*@
+                                @*@Html.Action("_Edit", "Home")**@
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+

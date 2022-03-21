@@ -1,0 +1,60 @@
+﻿@using PersonelTakipOtomasyonu.Models.Entity
+@model List<Tracking>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@{int sira = 1;}
+<br />
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Giriş Çıkış Listesi</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ad Soyad</th>
+                    <th>Giriş Saati</th>
+                    <th>Çıkış Saati</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var trackingList in Model)
+                {
+                    <tr>
+                        <td>@sira</td>
+                        <td>@trackingList.User.FullName</td>
+                        <td>@trackingList.LogInTime.ToString("dd MMMM yyyy" + "—" + " SAAT " + " hh:mm")</td>
+                        <td>@trackingList.LogOutTime.ToString("dd MMMM yyyy" + "—" + " SAAT " + " hh:mm")</td>
+                        <td>
+                            <div class="dropdown ">
+                                <a class="btn btn-warning dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="/User/Details/@trackingList.TrackingId"><i class="fas fa-eye"></i> Detay</a>
+                                    <a class="dropdown-item" href="/User/UserReport/@trackingList.TrackingId"><i class="fas fa-file"></i> Raporlar</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Düzenle</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Sil</a>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    sira++;
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+    <!-- /.card-body -->
+</div>
+
+

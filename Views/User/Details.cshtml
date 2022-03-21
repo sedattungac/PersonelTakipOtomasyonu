@@ -1,0 +1,88 @@
+﻿@using PersonelTakipOtomasyonu.Models.Entity
+@model List<User>
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<div class="container ">
+    <br /><br />
+    <h2 >Personel Detay</h2>
+    <div class="row mt-5">
+        @foreach (var userDetail in Model)
+        {
+            <div class="col-6">
+                <dl class="row">
+
+                    <dt class="col-sm-12">
+                        Departman
+                    </dt>
+                    <dd class="col-sm-12">
+                        @userDetail.Department.Name
+                    </dd>
+                </dl>
+                <dl class="row">
+
+                    <dt class="col-sm-12">
+                        Adı Soyadı
+                    </dt>
+                    <dd class="col-sm-12">
+                        @userDetail.FullName
+                    </dd>
+                </dl>
+
+                <dl class="row">
+
+                    <dt class="col-sm-12">
+                        Şifre
+                    </dt>
+                    <dd class="col-sm-12">
+                        @userDetail.Password
+                    </dd>
+                </dl>
+
+
+            </div>
+            <div class="col-6">
+                <dl class="row">
+
+                    <dt class="col-sm-12">
+                        Email
+                    </dt>
+                    <dd class="col-sm-12">
+                        @userDetail.Email
+                    </dd>
+                </dl>
+                <dl class="row">
+
+                    <dt class="col-sm-12">
+                        Telefon
+                    </dt>
+                    <dd class="col-sm-12">
+                        @userDetail.Telephone
+                    </dd>
+                </dl>
+                <dl class="row">
+
+                    <dt class="col-sm-12">
+                        Adres
+                    </dt>
+                    <dd class="col-sm-12">
+                        @userDetail.Address
+                    </dd>
+                </dl>
+                <div>
+
+                    <a class="btn btn-info btn-sm " href="/User/Edit/@userDetail.UserId"><i class="fas fa-cog"></i> Düzenle</a>
+
+
+                </div>
+            </div>
+            
+        }
+    </div>
+
+ 
+</div>
+<br>

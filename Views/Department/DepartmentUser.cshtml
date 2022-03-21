@@ -1,0 +1,52 @@
+﻿@using PersonelTakipOtomasyonu.Models.Entity
+@model List<User>
+@{
+    ViewData["Title"] = "DepartmentUser";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+@{int sira = 1;}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">@ViewBag.departmentName Personel Listesi</h3>
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Personel Ad Soyad</th>
+                    <th>Telefon</th>
+                    <th>Mail</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var userList in Model)
+                {
+                    <tr>
+                        <td>@sira</td>
+                        <td>@userList.FullName</td>
+                        <td>@userList.Telephone</td>
+                        <td>@userList.Email</td>
+                        
+
+                    </tr>
+                    sira++;
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+    <!-- /.card-body -->
+</div>
+
+
+
+
+

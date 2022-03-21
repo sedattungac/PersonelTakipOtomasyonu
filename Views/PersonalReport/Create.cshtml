@@ -1,0 +1,40 @@
+﻿@model PersonelTakipOtomasyonu.Models.Entity.AddReport
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<br />
+<h4>Rapor Ekleme Sayfası</h4>
+<hr />
+<div class="row">
+    <div class="container-fluid col-11">
+        <form asp-action="Create" asp-controller="Report" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"> Rapor Adı</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReportFile" class="control-label"> Rapor Ekle</label>
+                <input runat="server" accept="image/*;capture=camera" name="ReportFile" type="file" asp-for="ReportFile" class="form-control" />
+                <span asp-validation-for="ReportFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="float-left">
+                    <a class="btn btn-dark" asp-action="Index"><i class="fas fa-arrow-left"></i> Listeye Geri Dön</a>
+                </div>
+                <div class="float-right">
+                    <button type="submit" value="Create" class="btn btn-primary"><i class="fas fa-save"></i> Kaydet</button>
+                </div>
+            </div>
+            <div style="visibility:hidden;" class="form-group">
+                <label asp-for="UserId" class="control-label"> Kullanıcı</label>
+                <input asp-for="UserId" class="form-control" value="@ViewBag.user">
+            </div>
+        </form>
+    </div>
+</div>
+

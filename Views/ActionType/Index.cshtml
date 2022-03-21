@@ -1,0 +1,57 @@
+﻿@using PersonelTakipOtomasyonu.Models.Entity
+@model List<ActionType>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@{int sira = 1;}
+<br />
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Aksiyon Türü Listesi</h3>
+        <a href="/ActionType/Create" class="btn btn-primary btn-sm float-right">Aksiyon Tipi Ekle</a>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Aksiyon Türü</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var actiontypeList in Model)
+                {
+                    <tr>
+                        <td>@sira</td>
+                        <td>@actiontypeList.Name</td>
+                        <td>
+                            <div class="dropdown-left ">
+                                <a class="btn btn-warning dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </a>
+
+                                <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="/ActionType/Edit/@actiontypeList.ActionTypeId"><i class="fas fa-cog"></i> Düzenle</a>
+                                    <a class="dropdown-item" href="/ActionType/Delete/@actiontypeList.ActionTypeId" id="DeleteBtn" 
+                                       onclick="return confirm('Silmek istediğinize emin misiniz?');"><i class="fas fa-trash"></i> Sil</a>
+                                </div>
+                            </div>
+
+                        </td>
+
+                    </tr>
+                    sira++;
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+    <!-- /.card-body -->
+</div>
+
+

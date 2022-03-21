@@ -1,0 +1,58 @@
+﻿@using PersonelTakipOtomasyonu.Models.Entity
+@model List<Report>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@{int sira = 1;}
+<br />
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Rapor Listesi</h3>
+        <a href="/Report/Create" class="btn btn-primary btn-sm float-right">Rapor Ekle</a>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Personel</th>
+                    <th>Açıklama</th>
+                    <th>Yapılma Tarihi</th>
+                    <th>Rapor</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reportList in Model)
+                {
+                    <tr>
+                        <td>@sira</td>
+                        <td>@reportList.User.FullName</td>
+                        <td>@reportList.Name</td>
+                        <td>@reportList.AddDate.ToString("dd MMMM yyyy " + "—" + "SAAT" + " hh:mm ")</td>
+                        <td><a href="/Raporlar/@reportList.ReportFile" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file"></i> Belge</a></td>
+                        <td>
+                            <a class="btn btn-danger btn-sm" href="/Report/Delete/@reportList.ReportId" id="DeleteBtn" 
+                                       onclick="return confirm('Silmek istediğinize emin misiniz?');"><i class="fas fa-trash"></i> Sil</a>
+                        </td>
+                       
+                    </tr>
+                    sira++;
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+    <!-- /.card-body -->
+</div>
+
+
+
+
+
+
+

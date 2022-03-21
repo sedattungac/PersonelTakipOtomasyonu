@@ -1,0 +1,147 @@
+﻿@model PersonelTakipOtomasyonu.Models.Entity.User
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<br />
+<script src="~/lib/jquery/3.6.0/jquery/jquery.min.js"></script>
+<script src="~/lib/jquery/3.6.0/jquery/jquery.js"></script>
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+@*<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>*@
+@*<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>*@
+<div class="container">
+    <button class="btn btn-info " data-toggle="modal" data-target="#myModal"> Yeni Personel</button>
+</div>
+<div class="container">
+    <table id="tbl" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Ad Soyad</td>
+                <td>Email</td>
+                <td>Telefon</td>
+                @*<th>Departman</th>
+                    <th>Action</th>*@
+            </tr>
+        </thead>
+        <tbody id="SetUserList">
+            @*Listeleme*@
+            <tr id="Load">
+            </tr>
+
+
+        </tbody>
+    </table>
+</div>
+@using (Html.BeginForm("Create", "Popup", FormMethod.Post))
+{
+    <div class="modal" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Kullanıcı Ekle</h4>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Departman</label>
+                            @Html.DropDownListFor(x => x.DepartmentId, (List<SelectListItem>)ViewBag.list, new { @class = "form-control" })
+                        </div>
+                        <label>Adı ve Soyadı</label>
+                        @Html.TextBoxFor(x => x.FullName, new { @class = "form-control" })
+                        <div class="form-group">
+                            <label>Telefon</label>
+                            @Html.TextBoxFor(x => x.Telephone, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <div class="float-right">
+                            <input type="submit" name="Ekle" value="Ekle" class="btn btn-info" />
+                        </div>
+                        <div class="float-left">
+                            <button data-dismiss="modal" class="btn btn-danger"> Kapat</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("Edit", "Popup", FormMethod.Post))
+{
+    <div class="modal" id="myModal2" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Kullanıcı Güncelle</h4>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="form-group">
+
+                            <div style="visibility:hidden;">
+                                @Html.DropDownListFor(x => x.UserId, (List<SelectListItem>)ViewBag.list, new { @id = "id", @class = "form-control" })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Departman</label>
+                            @Html.DropDownListFor(x => x.DepartmentId, (List<SelectListItem>)ViewBag.list, new { @id = "id", @class = "form-control" })
+                        </div>
+                        <label>Adı ve Soyadı</label>
+                        @Html.TextBoxFor(x => x.FullName, new { @id = "id", @class = "form-control" })
+                        <div class="form-group">
+                            <label>Telefon</label>
+                            @Html.TextBoxFor(x => x.Telephone, new { @id = "id", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <div class="float-left">
+                            <input type="submit" name="Ekle" value="Ekle" class="btn btn-info" />
+                        </div>
+                        <div class="float-right">
+                            <button data-dismiss="modal" class="btn btn-danger"> Kapat</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    $("#Load").html("Yükleniyor...");
+    //GetUserList JsonResult
+    $.get("/Popup/GetUserList/", null, DataBind)
+    //list Json
+    function DataBind(liste) {
+        console.log(liste);
+        var setData = $("#SetUserList");
+        $("#Load").html("");
+        for (var i = 0; i < liste.length; i++) {
+            console.log(liste[i])
+            var data = `
+                        <tr>
+                            <td>${liste[i].userId}</td>
+                            <td>${liste[i].fullName}</td>
+                            <td>${liste[i].email}</td>
+                            <td>${liste[i].telephone}</td>
+                            <td><a href='#' class=btn btn-danger onclick='EditCategory(${liste[i].telephone.userId}></td>
+                        </tr>
+                        `;
+            setData.append(data);
+        }
+
+    }
+</script>

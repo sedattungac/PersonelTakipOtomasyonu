@@ -1,0 +1,50 @@
+﻿@using PersonelTakipOtomasyonu.Models.Entity
+@model List<Report>
+@{
+    ViewData["Title"] = "UserReport";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@{int sira = 1;}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">@ViewBag.userName Rapor Listesi</h3>
+       
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Rapor Adı</th>
+                    <th>Eklenme Tarihi</th>
+
+                    <th>Belge</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reportList in Model)
+                {
+                    <tr>
+                        <td>@sira</td>
+                        <td>@reportList.Name</td>
+                        <td>@reportList.AddDate.ToString("dd MMMMMMMM yyyy")</td>
+                        <td>
+                           <a href="@reportList.ReportFile" target="_blank" class="btn btn-primary"><i class="fas fa-file"></i> RAPOR</a>
+                        </td>
+
+                    </tr>
+                    sira++;
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+    <!-- /.card-body -->
+</div>
+
+
+
